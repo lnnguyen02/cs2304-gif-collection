@@ -1,0 +1,19 @@
+volumes:
+  gif-db: {}
+services:
+  app:
+    image: node:16-alpine
+    command: npm run dev
+    working_dir: /usr/local/app
+    volumes:
+      - ./:/usr/local/app
+    ports:
+      - 3000:3000
+  mongo:
+    image: mongo:5.0
+    volumes:
+      - gif-db:/data/db
+  interface:
+    image: mongo-express:latest
+    ports:
+      - 8080:8081

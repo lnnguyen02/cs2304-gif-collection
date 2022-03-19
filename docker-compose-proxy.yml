@@ -1,0 +1,14 @@
+services:
+  proxy:
+    image: traefik:2.4
+    command: --providers.docker --api.insecure
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80
+      - 8080:8080
+    networks:
+      - default
+networks:
+  default:
+    name: proxy

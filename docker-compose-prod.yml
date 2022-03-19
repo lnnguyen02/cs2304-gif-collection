@@ -1,0 +1,31 @@
+volumes:
+  gif-db: {}
+services:
+  mongo:
+    image: mongo:5.0
+    volumes:
+      - gif-db:/data/db
+    networks:
+      - not-default
+  app:
+    image: lnnguyen02/week-7:latest
+    networks:
+      - default
+      - not-default
+    labels:
+      traefik.http.routers.app.rule: Host(`app.localhost`)
+      traefik.http.services.app.loadbalancer.server.port: 3000
+  interface:
+    image: mongo-express:latest
+    networks:
+      - default
+      - not-default
+    labels:
+      traefik.http.routers.interface.rule: Host(`interface.localhost`)
+      traefik.http.services.interface.loadbalancer.server.port: 8081
+networks:
+  default:
+    name: proxy
+    external: true
+  not-default:
+    name: random-gif

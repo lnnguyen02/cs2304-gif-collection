@@ -1,0 +1,12 @@
+services:
+  another:
+    image: mikesir87/hello-world:latest
+    networks:
+      - default
+    labels:
+      traefik.http.routers.another.rule: Host(`hello.localhost`)
+      traefik.http.services.another.loadbalancer.server.port: 80
+networks:
+  default:
+    name: proxy
+    external: true
