@@ -6,7 +6,7 @@ const MONGO_URL = "mongodb://mongo:27017";
 const mongoClient = new MongoClient(MONGO_URL);
 
 //START
-const MY_MESSAGE = "Thanks for coming! Hope you enjoy the gifs that I have hand selected. :)";
+const MY_MESSAGE = "How are you liking this new message?";
 // NOTE - add the next few lines
 async function run() {
   try {
@@ -32,7 +32,7 @@ async function run() {
 app.get("/", async (req, res) => {
   const cursor = gifCollection.aggregate([{ $sample: { size : 1 }}]);
   const data = await cursor.next();
-  const imageUrl = (data) ? data.url : "https://media.giphy.com/media/14uQ3cOFteDaU/giphy.gif";
+  const imageUrl = (data) ? data.url : "https://media.giphy.com/media/WKdWA04KRn58A/giphy.gif";
   res.render("index", { imageUrl, message: MY_MESSAGE });
 });
 
