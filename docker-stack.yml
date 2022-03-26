@@ -3,9 +3,18 @@ volumes:
 version: "3.8"
 services:
   app:
-    image: lnnguyen02/gif-collection
+    image: lnnguyen02/gif-collection:change-message-image-color
     ports:
       - 3000:3000
+    deploy:
+      replicas: 3
+      placement:
+        constraints:
+          - "node.role==worker"
+      update_config:
+        parallelism: 2
+        delay: 10s
+        order: start-first
   mongo:
     image: mongo:5.0
     volumes:
@@ -13,4 +22,4 @@ services:
   interface:
     image: mongo-express:latest
     ports:
-      - 8080:8081
+      - 8080
