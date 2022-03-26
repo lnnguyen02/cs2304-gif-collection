@@ -1,0 +1,15 @@
+volumes:
+  gif-db: {}
+services:
+  app:
+    image: lnnguyen02/gif-collection:latest
+    ports:
+      - 3000:3000
+  mongo:
+    image: mongo:5.0
+    volumes:
+      - gif-db:/data/db
+  interface:
+    image: mongo-express:latest
+    ports:
+      - 8080:8081
