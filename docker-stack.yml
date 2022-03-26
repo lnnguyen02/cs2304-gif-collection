@@ -3,7 +3,7 @@ volumes:
 version: "3.8"
 services:
   app:
-    image: lnnguyen02/gif-collection:change-message-image-color
+    image: lnnguyen02/gif-collection:latest
     ports:
       - 3000:3000
     deploy:
